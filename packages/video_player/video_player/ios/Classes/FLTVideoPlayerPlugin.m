@@ -186,7 +186,17 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
       transform.tx = 0;
       transform.ty = videoTrack.naturalSize.width;
     }
+  } else {
+    NSInteger rotationDegrees = (NSInteger)round(radiansToDegrees(atan2(transform.b, transform.a)));
+    NSLog(@"Rotation: %ld. Natural width,height: %f, %f", (long)rotationDegrees,
+          videoTrack.naturalSize.width, videoTrack.naturalSize.height);
+    if (rotationDegrees == 90) {
+      NSLog(@"Setting transform tx");
+      transform.tx = videoTrack.naturalSize.height;
+      transform.ty = 0;
+    }
   }
+    
   return transform;
 }
 
